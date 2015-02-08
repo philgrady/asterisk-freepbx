@@ -1,7 +1,8 @@
 #FreePBX Docker File
 FROM phusion/baseimage:0.9.15
-MAINTAINER marc brown <marc@22walker.co.uk> v0.4
-
+MAINTAINER phil grady <philipagrady@googlemail.com> v0.4
+# Original by Marc Brown
+# I added -pPASSWORD to mysql setup it looked like it couldnt access mysql DB and nano and mc
 # Set correct environment variables.
 ENV HOME /root
 ENV DEBIAN_FRONTEND noninteractive
@@ -18,9 +19,12 @@ ADD start.sh /root/
 # Add VOLUME to allow backup of FREEPBX
 VOLUME ["/etc/freepbxbackup"]
 
-# open up ports needed  by freepbx and asterisk 5060 sip reg 80 web port 10000-10099 rtp   
+# open up ports needed  by freepbx and asterisk 5060 sip reg 80 web port 10000-10099 rtp PG added some more ports also delisted port 80 so i could map to 8080 instead
 EXPOSE 5060
-EXPOSE 80
+EXPOSE 5061
+EXPOSE 2727
+EXPOSE 4569
+EXPOSE 5036
 EXPOSE 8009
 EXPOSE 10000/udp 10001/udp 10002/udp 10003/udp 10004/udp 10005/udp 10006/udp 10007/udp 10008/udp 10009/udp 10010/udp \
 10011/udp 10012/udp 10013/udp 10014/udp 10015/udp 10016/udp 10017/udp 10018/udp 10019/udp 10020/udp \
