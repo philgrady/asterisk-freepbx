@@ -118,8 +118,8 @@ RUN sed -i 's/\(^upload_max_filesize = \).*/\120M/' /etc/php5/apache2/php.ini \
   && /etc/init.d/mysql start \
   && mysqladmin -u root create asterisk \
   && mysqladmin -u root create asteriskcdrdb \
-  && mysql -u root -e "GRANT ALL PRIVILEGES ON asterisk.* TO $ASTERISKUSER@localhost IDENTIFIED BY '$ASTERISK_DB_PW';" \
-  && mysql -u root -e "GRANT ALL PRIVILEGES ON asteriskcdrdb.* TO $ASTERISKUSER@localhost IDENTIFIED BY '$ASTERISK_DB_PW';" \
+  && mysql -u root -p'ASTERISK_DB_PW' -e "GRANT ALL PRIVILEGES ON asterisk.* TO $ASTERISKUSER@localhost IDENTIFIED BY '$ASTERISK_DB_PW';" \
+  && mysql -u root -p'ASTERISK_DB_PW' -e "GRANT ALL PRIVILEGES ON asteriskcdrdb.* TO $ASTERISKUSER@localhost IDENTIFIED BY '$ASTERISK_DB_PW';" \
   && mysql -u root -e "flush privileges;"
 
 WORKDIR /tmp
